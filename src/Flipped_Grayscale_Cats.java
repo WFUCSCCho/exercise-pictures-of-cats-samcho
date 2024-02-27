@@ -5,7 +5,14 @@ import javax.imageio.ImageIO;
 
 public class Flipped_Grayscale_Cats {
     public static void main(String[] args) {
-        String filename = "CAT_00/00000001_000.jpg";
+
+        if (args.length != 1) {
+            System.err.println("Usage: java Flipped_Grayscale_Cats <input file>");
+            System.exit(1);
+        }
+
+        // input file based on command line argument
+        String filename = args[0];
         File myFile = null;
 
         // image parameters
@@ -43,7 +50,7 @@ public class Flipped_Grayscale_Cats {
             }
 
             // write out grayscale image
-            File output = new File("grayscale.jpg");
+            File output = new File(args[0].replaceAll(".jpg", "") + "_gs.jpg");
             ImageIO.write(image, "jpg", output);
         } catch (Exception e) {
             System.err.println("Could not open input file.");
